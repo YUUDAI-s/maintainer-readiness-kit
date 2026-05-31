@@ -28,5 +28,10 @@ dependencies = []
 [project.scripts]
 maintainer-readiness = "maintainer_readiness.cli:main"
 
+[project.urls]
+Homepage = "https://github.com/YUUDAI-s/maintainer-readiness-kit"
+Repository = "https://github.com/YUUDAI-s/maintainer-readiness-kit"
+Issues = "https://github.com/YUUDAI-s/maintainer-readiness-kit/issues"
+
 [tool.setuptools.packages.find]
 where = ["src"]

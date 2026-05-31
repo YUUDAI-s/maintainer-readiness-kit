@@ -1,5 +1,9 @@
 # Maintainer Readiness Kit
 
+[![Maintainer readiness](https://github.com/YUUDAI-s/maintainer-readiness-kit/actions/workflows/maintainer-readiness.yml/badge.svg)](https://github.com/YUUDAI-s/maintainer-readiness-kit/actions/workflows/maintainer-readiness.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg)](pyproject.toml)
+
 Maintainer Readiness Kit is a small, dependency-light CLI that audits an open
 source repository for maintainer-facing signals: documentation, license files,
 security policy, issue and pull request templates, CI, tests, recent git
@@ -88,6 +92,17 @@ This writes starter maintainer files only when they do not already exist:
 - No external writes from `inspect`.
 - No claims that a repository qualifies for any external program.
 
+## Maintainer Workflows
+
+This project is built for routine maintainer tasks:
+
+- pre-publication checks before making a repository public,
+- contributor onboarding checks before accepting outside PRs,
+- release-readiness checks before tagging a version,
+- safety checks before attaching reports to sponsorship or maintainer-support
+  applications,
+- CI-friendly JSON output for repeatable repository hygiene reviews.
+
 ## Limitations
 
 This tool cannot prove that a repository is widely adopted, safe, or eligible
@@ -102,6 +117,8 @@ $env:PYTHONPATH = "src"
 python -m unittest discover -s tests
 python -m maintainer_readiness inspect . --output readiness-report.md
 ```
+
+See [ROADMAP.md](ROADMAP.md) for near-term maintainer-focused work.
 
 ## License
 

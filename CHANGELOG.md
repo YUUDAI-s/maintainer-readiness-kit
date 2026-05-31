@@ -6,4 +6,6 @@
 - Added optional GitHub public repository signal enrichment.
 - Added `init` command for starter maintainer templates.
 - Added high-risk local credential filename warnings.
+- Added readiness levels for clearer release and publication decisions.
+- Added CI smoke workflow and sample report.
 - Added unit tests for checks and template behavior.
