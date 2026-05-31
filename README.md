@@ -32,6 +32,7 @@ cd maintainer-readiness-kit
 $env:PYTHONPATH = "src"
 python -m unittest discover -s tests
 python -m maintainer_readiness inspect . --output readiness-report.md
+python -m maintainer_readiness inspect . --fail-under 90
 ```
 
 To include public GitHub signals:
@@ -68,6 +69,9 @@ The Markdown report includes:
 - optional public GitHub evidence,
 - high-risk file warnings,
 - next actions before public release.
+
+For CI, use `--fail-under` to make the command return a non-zero exit code when
+the readiness percentage is below your chosen threshold.
 
 ### `init`
 

@@ -3,7 +3,7 @@
 ## 0.2.0
 
 - Add language-specific recommendations for Python, Node.js, Rust, and Go.
-- Add a `--fail-under` option for CI gates.
+- [x] Add a `--fail-under` option for CI gates.
 - Add a report section for stale issues and stale pull requests when `--repo`
   is provided.
 - Add a release-readiness checklist that compares changelog, tags, and local

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 - 2026-05-31
+
+- Added `inspect --fail-under SCORE` for CI readiness gates.
+- Updated the GitHub Actions workflow to enforce a minimum readiness score.
+- Added CLI tests for fail-under behavior.
+
 ## 0.1.0 - 2026-05-31
 
 - Added the initial `inspect` command for local maintainer-readiness reports.

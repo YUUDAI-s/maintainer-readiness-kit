@@ -10,7 +10,7 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from maintainer_readiness.cli import main
+from maintainer_readiness.cli import main, readiness_exit_code
 
 
 class CliTests(unittest.TestCase):
@@ -35,6 +35,22 @@ class CliTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             self.assertTrue((Path(tmp) / "CONTRIBUTING.md").exists())
             self.assertIn('"templates"', stdout.getvalue())
+
+    def test_fail_under_returns_nonzero_when_score_is_low(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+
+            with redirect_stdout(StringIO()):
+                exit_code = main(["inspect", str(root), "--fail-under", "90"])
+
+            self.assertEqual(exit_code, 1)
+
+    def test_readiness_exit_code_accepts_passing_threshold(self):
+        result = {"percent": 100.0}
+
+        self.assertEqual(readiness_exit_code(result, 90), 0)
+        self.assertEqual(readiness_exit_code(result, None), 0)
 
 
 if __name__ == "__main__":

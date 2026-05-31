@@ -23,6 +23,12 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_parser.add_argument("--repo", help="Optional GitHub repo as owner/name or URL.")
     inspect_parser.add_argument("--output", help="Write Markdown report to this path.")
     inspect_parser.add_argument("--json", action="store_true", help="Print JSON instead of Markdown.")
+    inspect_parser.add_argument(
+        "--fail-under",
+        type=float,
+        metavar="SCORE",
+        help="Exit non-zero when the readiness percentage is below SCORE.",
+    )
 
     init_parser = subparsers.add_parser("init", help="Write starter maintainer templates.")
     init_parser.add_argument("path", nargs="?", default=".", help="Repository path to initialize.")
@@ -47,11 +53,12 @@ def run_inspect(args: argparse.Namespace) -> int:
     github = None
     if args.repo:
         github = fetch_github_repo(args.repo)
+    exit_code = readiness_exit_code(result, args.fail_under)
 
     if args.json:
         payload = {"readiness": result, "github": github}
         print(json.dumps(payload, ensure_ascii=False, indent=2))
-        return 0
+        return exit_code
 
     markdown = render_markdown(result, github)
     if args.output:
@@ -61,7 +68,15 @@ def run_inspect(args: argparse.Namespace) -> int:
         print(f"Wrote {output_path}")
     else:
         print(markdown)
-    return 0
+    return exit_code
+
+
+def readiness_exit_code(result: dict, fail_under: float | None) -> int:
+    if fail_under is None:
+        return 0
+    if fail_under < 0 or fail_under > 100:
+        raise SystemExit("--fail-under must be between 0 and 100")
+    return 1 if result["percent"] < fail_under else 0
 
 
 def run_init(args: argparse.Namespace) -> int:

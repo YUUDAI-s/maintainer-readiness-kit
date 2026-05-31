@@ -21,6 +21,17 @@ python -m maintainer_readiness inspect . --repo owner/name --output readiness-re
 This calls the public GitHub repository API and adds stars, forks, open issues,
 visibility, and last-push information to the report.
 
+## Fail CI Below a Threshold
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m maintainer_readiness inspect . --fail-under 90
+```
+
+The command still prints the report, but exits with code `1` when the readiness
+percentage is below the threshold. This is useful for pull request and release
+checks.
+
 ## Initialize Starter Maintainer Files
 
 ```powershell
