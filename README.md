@@ -13,6 +13,16 @@ The goal is simple: give solo and small-team maintainers a repeatable report
 they can use before publishing a repository, onboarding contributors, or asking
 for support from open source maintainer programs.
 
+## What It Helps You Decide
+
+Use it when you need a quick answer to:
+
+- Is this repository ready to make public?
+- What maintainer files are missing before I invite contributors?
+- Will CI fail if the repository falls below a readiness threshold?
+- What ecosystem-specific maintenance steps should I add next?
+- Can I share a report without leaking my local machine path?
+
 ## Features
 
 - Scores maintainer-readiness signals with evidence and suggested fixes.
@@ -35,6 +45,15 @@ $env:PYTHONPATH = "src"
 python -m unittest discover -s tests
 python -m maintainer_readiness inspect . --output readiness-report.md
 python -m maintainer_readiness inspect . --fail-under 90
+```
+
+Typical output:
+
+```text
+Score: 100 / 100 (100.0%)
+Level: ready
+Ecosystem Recommendations: Python
+High-Risk File Warnings: No high-risk credential filenames found.
 ```
 
 To include public GitHub signals:
@@ -76,6 +95,28 @@ The Markdown report includes:
 
 For CI, use `--fail-under` to make the command return a non-zero exit code when
 the readiness percentage is below your chosen threshold.
+
+### GitHub Actions
+
+```yaml
+name: Maintainer readiness
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install maintainer-readiness-kit
+      - run: maintainer-readiness inspect . --fail-under 80
+```
 
 ### `init`
 
@@ -128,6 +169,8 @@ python -m maintainer_readiness inspect . --output readiness-report.md
 ```
 
 See [ROADMAP.md](ROADMAP.md) for near-term maintainer-focused work.
+See [examples/reports](examples/reports) for generated reports from real
+repositories.
 
 ## License
 

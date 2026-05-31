@@ -70,3 +70,9 @@ to overwrite starter maintainer files.
 4. Publish the repository.
 5. Run `inspect --repo owner/name` after publication and attach the generated
    report to the release or maintainer handoff notes.
+
+## Public Sample Reports
+
+Generated reports are kept in `examples/reports/`. When adding reports from
+local checkouts, use `--root-label` and avoid publishing reports for private
+client or business repositories.
