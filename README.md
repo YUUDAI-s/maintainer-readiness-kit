@@ -39,10 +39,27 @@ Use it when you need a quick answer to:
 
 ## Quick Start
 
+Install from the repository:
+
 ```powershell
+git clone https://github.com/YUUDAI-s/maintainer-readiness-kit.git
 cd maintainer-readiness-kit
+python -m pip install -e .
+maintainer-readiness inspect . --output readiness-report.md
+maintainer-readiness inspect . --fail-under 90
+```
+
+After the package is published to PyPI:
+
+```powershell
+python -m pip install maintainer-readiness-kit
+maintainer-readiness inspect . --output readiness-report.md
+```
+
+For local source development without installation:
+
+```powershell
 $env:PYTHONPATH = "src"
-python -m unittest discover -s tests
 python -m maintainer_readiness inspect . --output readiness-report.md
 python -m maintainer_readiness inspect . --fail-under 90
 ```
@@ -171,6 +188,7 @@ python -m maintainer_readiness inspect . --output readiness-report.md
 See [ROADMAP.md](ROADMAP.md) for near-term maintainer-focused work.
 See [examples/reports](examples/reports) for generated reports from real
 repositories.
+See [docs/pypi.md](docs/pypi.md) for package build and publishing notes.
 
 ## License
 

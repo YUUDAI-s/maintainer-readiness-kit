@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 - 2026-05-31
+
+- Added PyPI packaging guidance and a manual publish workflow.
+- Added public sample reports and clearer README usage examples.
+
 ## 0.3.0 - 2026-05-31
 
 - Added ecosystem-specific recommendations for Python, Node.js, Rust, and Go.
