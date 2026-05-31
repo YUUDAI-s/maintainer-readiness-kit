@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2 - 2026-05-31
+
+- Added a sanitized local Node application sample report.
+
 ## 0.3.1 - 2026-05-31
 
 - Added PyPI packaging guidance and a manual publish workflow.
