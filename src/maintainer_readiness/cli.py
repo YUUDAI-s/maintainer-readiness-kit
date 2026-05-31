@@ -22,6 +22,7 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_parser.add_argument("path", nargs="?", default=".", help="Repository path to inspect.")
     inspect_parser.add_argument("--repo", help="Optional GitHub repo as owner/name or URL.")
     inspect_parser.add_argument("--output", help="Write Markdown report to this path.")
+    inspect_parser.add_argument("--root-label", help="Display label to use instead of the absolute local root path.")
     inspect_parser.add_argument("--json", action="store_true", help="Print JSON instead of Markdown.")
     inspect_parser.add_argument(
         "--fail-under",
@@ -49,7 +50,7 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def run_inspect(args: argparse.Namespace) -> int:
-    result = inspect_project(args.path)
+    result = inspect_project(args.path, root_label=args.root_label)
     github = None
     if args.repo:
         github = fetch_github_repo(args.repo)

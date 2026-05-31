@@ -21,10 +21,12 @@ class CliTests(unittest.TestCase):
             output = root / "report.md"
 
             with redirect_stdout(StringIO()):
-                exit_code = main(["inspect", str(root), "--output", str(output)])
+                exit_code = main(["inspect", str(root), "--output", str(output), "--root-label", "demo"])
 
             self.assertEqual(exit_code, 0)
-            self.assertIn("Maintainer Readiness Report", output.read_text(encoding="utf-8"))
+            report = output.read_text(encoding="utf-8")
+            self.assertIn("Maintainer Readiness Report", report)
+            self.assertIn("`demo`", report)
 
     def test_init_json_reports_written_files(self):
         with tempfile.TemporaryDirectory() as tmp:

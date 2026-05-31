@@ -44,6 +44,57 @@ HIGH_RISK_NAMES = {
 }
 
 
+@dataclass(frozen=True)
+class EcosystemRule:
+    ecosystem: str
+    evidence: tuple[str, ...]
+    recommendations: tuple[str, ...]
+
+
+ECOSYSTEM_RULES: tuple[EcosystemRule, ...] = (
+    EcosystemRule(
+        "python",
+        ("pyproject.toml", "requirements.txt", "setup.py", "setup.cfg"),
+        (
+            "Run `python -m unittest discover -s tests` or the documented test command in CI.",
+            "Keep packaging metadata in `pyproject.toml` and publish wheels from tagged releases.",
+            "Use `src/` layout or clear package discovery to avoid importing local files accidentally.",
+            "Document supported Python versions and minimum dependency policy.",
+        ),
+    ),
+    EcosystemRule(
+        "node",
+        ("package.json", "pnpm-lock.yaml", "package-lock.json", "yarn.lock"),
+        (
+            "Expose `npm test` or an equivalent package script and run it in CI.",
+            "Commit one lockfile for apps, or document why libraries avoid lockfiles.",
+            "Document supported Node.js versions in README or package metadata.",
+            "Run a package audit or dependency review before releases.",
+        ),
+    ),
+    EcosystemRule(
+        "rust",
+        ("Cargo.toml", "Cargo.lock"),
+        (
+            "Run `cargo test` and `cargo clippy` in CI.",
+            "Document supported Rust toolchain or MSRV.",
+            "Commit `Cargo.lock` for binaries and document lockfile policy for libraries.",
+            "Keep release notes aligned with crate version changes.",
+        ),
+    ),
+    EcosystemRule(
+        "go",
+        ("go.mod", "go.sum"),
+        (
+            "Run `go test ./...` in CI.",
+            "Keep `go.mod` and `go.sum` committed and tidy.",
+            "Document supported Go version and module path.",
+            "Use tagged releases for module consumers.",
+        ),
+    ),
+)
+
+
 @dataclass
 class CheckResult:
     check_id: str
@@ -54,7 +105,7 @@ class CheckResult:
     fix: str
 
 
-def inspect_project(root: Path | str) -> dict:
+def inspect_project(root: Path | str, root_label: str | None = None) -> dict:
     root_path = Path(root).resolve()
     check_results = [run_check(root_path, spec) for spec in CHECKS]
     score = sum(item.weight for item in check_results if item.passed)
@@ -62,11 +113,13 @@ def inspect_project(root: Path | str) -> dict:
     percent = round((score / max_score) * 100, 1) if max_score else 0.0
     return {
         "root": str(root_path),
+        "display_root": root_label or str(root_path),
         "score": score,
         "max_score": max_score,
         "percent": percent,
         "level": classify_level(percent),
         "checks": [asdict(item) for item in check_results],
+        "ecosystems": detect_ecosystems(root_path),
         "git": get_git_metrics(root_path),
         "secret_warnings": find_high_risk_files(root_path),
     }
@@ -102,6 +155,33 @@ def find_first_existing(root: Path, candidates: Iterable[str]) -> str | None:
                     continue
             return candidate
     return None
+
+
+def detect_ecosystems(root: Path) -> list[dict]:
+    detected: list[dict] = []
+    for rule in ECOSYSTEM_RULES:
+        evidence = [candidate for candidate in rule.evidence if (root / candidate).exists()]
+        if evidence:
+            detected.append(
+                {
+                    "ecosystem": rule.ecosystem,
+                    "evidence": evidence,
+                    "recommendations": list(rule.recommendations),
+                }
+            )
+    if not detected:
+        detected.append(
+            {
+                "ecosystem": "generic",
+                "evidence": [],
+                "recommendations": [
+                    "Document the primary runtime, test command, and release process.",
+                    "Add a CI smoke check that exercises the project entry point.",
+                    "Include examples that show the smallest useful workflow.",
+                ],
+            }
+        )
+    return detected
 
 
 def get_git_metrics(root: Path) -> dict:

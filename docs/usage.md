@@ -11,6 +11,14 @@ The command reads files, directories, and local git metadata. It does not write
 to the inspected repository unless you choose an output path inside that
 repository.
 
+Use `--root-label` when you want to publish or share a report without exposing a
+local absolute path:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m maintainer_readiness inspect C:\path\to\repo --root-label my-project --output report.md
+```
+
 ## Add Public GitHub Signals
 
 ```powershell
@@ -31,6 +39,18 @@ python -m maintainer_readiness inspect . --fail-under 90
 The command still prints the report, but exits with code `1` when the readiness
 percentage is below the threshold. This is useful for pull request and release
 checks.
+
+## Ecosystem Recommendations
+
+The report detects common manifests and adds maintainer recommendations for:
+
+- Python: `pyproject.toml`, `requirements.txt`, `setup.py`, `setup.cfg`
+- Node.js: `package.json`, `pnpm-lock.yaml`, `package-lock.json`, `yarn.lock`
+- Rust: `Cargo.toml`, `Cargo.lock`
+- Go: `go.mod`, `go.sum`
+
+If no known manifest is detected, the report falls back to generic maintainer
+recommendations.
 
 ## Initialize Starter Maintainer Files
 
