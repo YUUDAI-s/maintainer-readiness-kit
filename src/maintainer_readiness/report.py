@@ -10,6 +10,7 @@ def render_markdown(result: dict, github: dict | None = None) -> str:
     lines.append(f"- Generated: {datetime.now(timezone.utc).isoformat(timespec='seconds')}")
     lines.append(f"- Root: `{result['root']}`")
     lines.append(f"- Score: **{result['score']} / {result['max_score']}** ({result['percent']}%)")
+    lines.append(f"- Level: **{result['level']}**")
     lines.append("")
 
     if github:

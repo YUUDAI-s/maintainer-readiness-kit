@@ -59,15 +59,25 @@ def inspect_project(root: Path | str) -> dict:
     check_results = [run_check(root_path, spec) for spec in CHECKS]
     score = sum(item.weight for item in check_results if item.passed)
     max_score = sum(item.weight for item in check_results)
+    percent = round((score / max_score) * 100, 1) if max_score else 0.0
     return {
         "root": str(root_path),
         "score": score,
         "max_score": max_score,
-        "percent": round((score / max_score) * 100, 1) if max_score else 0.0,
+        "percent": percent,
+        "level": classify_level(percent),
         "checks": [asdict(item) for item in check_results],
         "git": get_git_metrics(root_path),
         "secret_warnings": find_high_risk_files(root_path),
     }
+
+
+def classify_level(percent: float) -> str:
+    if percent >= 90:
+        return "ready"
+    if percent >= 70:
+        return "nearly-ready"
+    return "needs-work"
 
 
 def run_check(root: Path, spec: CheckSpec) -> CheckResult:

@@ -19,6 +19,7 @@ for support from open source maintainer programs.
   smoke workflow.
 - Performs a conservative high-risk file check before public release.
 - Outputs Markdown or JSON for CI and handoff docs.
+- Classifies readiness as `ready`, `nearly-ready`, or `needs-work`.
 
 ## Quick Start
 
@@ -57,6 +58,7 @@ python -m maintainer_readiness inspect . --repo owner/name
 The Markdown report includes:
 
 - overall readiness score,
+- readiness level,
 - passing and missing signals,
 - local git maintenance evidence,
 - optional public GitHub evidence,

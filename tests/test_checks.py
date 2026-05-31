@@ -1,8 +1,14 @@
 from pathlib import Path
+import sys
 import tempfile
 import unittest
 
-from maintainer_readiness.checks import inspect_project
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+from maintainer_readiness.checks import classify_level, inspect_project
 
 
 class InspectProjectTests(unittest.TestCase):
@@ -27,6 +33,11 @@ class InspectProjectTests(unittest.TestCase):
         self.assertIn("license", passed)
         self.assertIn("tests", passed)
         self.assertIn("ci", passed)
+
+    def test_classifies_readiness_levels(self):
+        self.assertEqual(classify_level(95), "ready")
+        self.assertEqual(classify_level(75), "nearly-ready")
+        self.assertEqual(classify_level(30), "needs-work")
 
     def test_warns_about_high_risk_files(self):
         with tempfile.TemporaryDirectory() as tmp:

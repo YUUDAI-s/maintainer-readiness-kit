@@ -1,6 +1,12 @@
 from pathlib import Path
+import sys
 import tempfile
 import unittest
+
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
 
 from maintainer_readiness.templates import write_templates
 
