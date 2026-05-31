@@ -24,6 +24,8 @@ for support from open source maintainer programs.
 - Performs a conservative high-risk file check before public release.
 - Outputs Markdown or JSON for CI and handoff docs.
 - Classifies readiness as `ready`, `nearly-ready`, or `needs-work`.
+- Detects Python, Node.js, Rust, and Go manifests and adds ecosystem-specific
+  maintainer recommendations.
 
 ## Quick Start
 
@@ -58,6 +60,7 @@ file.
 python -m maintainer_readiness inspect . --output readiness-report.md
 python -m maintainer_readiness inspect . --json
 python -m maintainer_readiness inspect . --repo owner/name
+python -m maintainer_readiness inspect . --root-label public-sample
 ```
 
 The Markdown report includes:
@@ -68,6 +71,7 @@ The Markdown report includes:
 - local git maintenance evidence,
 - optional public GitHub evidence,
 - high-risk file warnings,
+- ecosystem-specific recommendations,
 - next actions before public release.
 
 For CI, use `--fail-under` to make the command return a non-zero exit code when

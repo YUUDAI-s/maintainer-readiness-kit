@@ -8,7 +8,7 @@ def render_markdown(result: dict, github: dict | None = None) -> str:
     lines.append("# Maintainer Readiness Report")
     lines.append("")
     lines.append(f"- Generated: {datetime.now(timezone.utc).isoformat(timespec='seconds')}")
-    lines.append(f"- Root: `{result['root']}`")
+    lines.append(f"- Root: `{result.get('display_root', result['root'])}`")
     lines.append(f"- Score: **{result['score']} / {result['max_score']}** ({result['percent']}%)")
     lines.append(f"- Level: **{result['level']}**")
     lines.append("")
@@ -53,6 +53,17 @@ def render_markdown(result: dict, github: dict | None = None) -> str:
     if not missing:
         lines.append("- None.")
     lines.append("")
+
+    lines.append("## Ecosystem Recommendations")
+    lines.append("")
+    for item in result.get("ecosystems", []):
+        evidence = ", ".join(f"`{value}`" for value in item.get("evidence", [])) or "no manifest detected"
+        lines.append(f"### {item['ecosystem'].title()}")
+        lines.append("")
+        lines.append(f"- Evidence: {evidence}")
+        for recommendation in item.get("recommendations", []):
+            lines.append(f"- {recommendation}")
+        lines.append("")
 
     warnings = result.get("secret_warnings", [])
     lines.append("## High-Risk File Warnings")

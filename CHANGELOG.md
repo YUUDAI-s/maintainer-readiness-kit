@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 - 2026-05-31
+
+- Added ecosystem-specific recommendations for Python, Node.js, Rust, and Go.
+- Added `inspect --root-label` for shareable reports that do not expose local paths.
+
 ## 0.2.0 - 2026-05-31
 
 - Added `inspect --fail-under SCORE` for CI readiness gates.

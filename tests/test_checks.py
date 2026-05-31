@@ -8,7 +8,7 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from maintainer_readiness.checks import classify_level, inspect_project
+from maintainer_readiness.checks import classify_level, detect_ecosystems, inspect_project
 
 
 class InspectProjectTests(unittest.TestCase):
@@ -33,6 +33,22 @@ class InspectProjectTests(unittest.TestCase):
         self.assertIn("license", passed)
         self.assertIn("tests", passed)
         self.assertIn("ci", passed)
+
+    def test_detects_python_ecosystem(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "pyproject.toml").write_text("[project]\nname='demo'\n", encoding="utf-8")
+
+            ecosystems = detect_ecosystems(root)
+
+        self.assertEqual(ecosystems[0]["ecosystem"], "python")
+        self.assertIn("pyproject.toml", ecosystems[0]["evidence"])
+
+    def test_uses_root_label_for_shared_reports(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            result = inspect_project(tmp, root_label="sample-project")
+
+        self.assertEqual(result["display_root"], "sample-project")
 
     def test_classifies_readiness_levels(self):
         self.assertEqual(classify_level(95), "ready")
