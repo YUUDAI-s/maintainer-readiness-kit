@@ -79,6 +79,7 @@ This writes starter maintainer files only when they do not already exist:
 
 - `CONTRIBUTING.md`
 - `SECURITY.md`
+- `MAINTAINERS.md`
 - `.github/ISSUE_TEMPLATE/bug_report.yml`
 - `.github/ISSUE_TEMPLATE/feature_request.yml`
 - `.github/PULL_REQUEST_TEMPLATE.md`
