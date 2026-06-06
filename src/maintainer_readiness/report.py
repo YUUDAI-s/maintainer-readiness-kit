@@ -22,6 +22,21 @@ def render_markdown(result: dict, github: dict | None = None) -> str:
         lines.append(f"- Forks: `{github.get('forks')}`")
         lines.append(f"- Open issues: `{github.get('open_issues')}`")
         lines.append(f"- Last push: `{github.get('pushed_at')}`")
+        if github.get("activity_error"):
+            lines.append(f"- Open issue/PR activity: unavailable ({github.get('activity_error')})")
+        elif github.get("stale_days") is not None:
+            lines.append(
+                f"- Open issues sampled: `{github.get('open_issue_items_sampled')}` "
+                f"(`{github.get('stale_issue_items')}` stale over {github.get('stale_days')} days)"
+            )
+            lines.append(
+                f"- Open PRs sampled: `{github.get('open_pr_items_sampled')}` "
+                f"(`{github.get('stale_pr_items')}` stale over {github.get('stale_days')} days)"
+            )
+            if github.get("oldest_open_issue_updated_at"):
+                lines.append(f"- Oldest open issue update: `{github.get('oldest_open_issue_updated_at')}`")
+            if github.get("oldest_open_pr_updated_at"):
+                lines.append(f"- Oldest open PR update: `{github.get('oldest_open_pr_updated_at')}`")
         lines.append("")
 
     git = result.get("git", {})

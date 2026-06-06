@@ -27,7 +27,13 @@ python -m maintainer_readiness inspect . --repo owner/name --output readiness-re
 ```
 
 This calls the public GitHub repository API and adds stars, forks, open issues,
-visibility, and last-push information to the report.
+visibility, last-push information, and a sampled stale issue/PR summary to the
+report.
+
+The stale summary reads up to 100 open GitHub issue records sorted by oldest
+update time. GitHub represents pull requests in the issues API, so the report
+splits sampled items into issues and PRs before counting items that have not
+been updated in 30 days.
 
 ## Fail CI Below a Threshold
 

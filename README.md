@@ -13,6 +13,14 @@ The goal is simple: give solo and small-team maintainers a repeatable report
 they can use before publishing a repository, onboarding contributors, or asking
 for support from open source maintainer programs.
 
+## Who Should Use It
+
+- Maintainers preparing a repository for public contributors.
+- Solo developers who need a concrete pre-release checklist.
+- Teams that want CI to fail when maintainer basics regress.
+- Open source applicants who need honest, shareable evidence instead of vague
+  claims.
+
 ## What It Helps You Decide
 
 Use it when you need a quick answer to:
@@ -28,6 +36,7 @@ Use it when you need a quick answer to:
 - Scores maintainer-readiness signals with evidence and suggested fixes.
 - Reads local git activity without requiring network access.
 - Optionally enriches the report with public GitHub repository signals.
+- Summarizes stale open issues and pull requests for public GitHub reports.
 - Generates starter maintainer templates for `CONTRIBUTING.md`,
   `SECURITY.md`, issue templates, pull request templates, and a GitHub Actions
   smoke workflow.
@@ -106,6 +115,7 @@ The Markdown report includes:
 - passing and missing signals,
 - local git maintenance evidence,
 - optional public GitHub evidence,
+- stale open issue and pull request counts when `--repo` is used,
 - high-risk file warnings,
 - ecosystem-specific recommendations,
 - next actions before public release.
@@ -189,6 +199,8 @@ See [ROADMAP.md](ROADMAP.md) for near-term maintainer-focused work.
 See [examples/reports](examples/reports) for generated reports from real
 repositories.
 See [docs/pypi.md](docs/pypi.md) for package build and publishing notes.
+See [docs/community-launch.md](docs/community-launch.md) for community launch
+copy and posting rules.
 
 ## License
 
