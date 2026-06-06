@@ -1,0 +1,35 @@
+title: "[Idea]: "
+labels:
+  - ideas
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Maintainer Readiness Kit. Please keep examples concrete.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Maintainer problem
+      description: What maintainer workflow or repository signal should the tool handle better?
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example repository or workflow
+      description: Link to a public example or describe the workflow without private details.
+    validations:
+      required: false
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Scoring
+        - GitHub signals
+        - Ecosystem recommendations
+        - CI output
+        - Documentation
+        - Other
+    validations:
+      required: true

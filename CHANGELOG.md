@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 - 2026-06-06
+
+- Added stale open issue and pull request summaries for public GitHub reports.
+- Added community launch notes and a GitHub Discussion idea template.
+
 ## 0.3.2 - 2026-05-31
 
 - Added a sanitized local Node application sample report.
