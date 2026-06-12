@@ -30,8 +30,10 @@ before publishing a repository, onboarding contributors, or preparing evidence
 for maintainer-support programs.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
+Release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.6.1
 GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.0`
 Public demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
+PyPI: pending Trusted Publisher setup
 
 ## Show HN Draft
 
@@ -59,9 +61,68 @@ I would like feedback from maintainers on which readiness signals are useful,
 which weights are wrong, and what the tool should detect next.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
+Release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.6.1
 GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.0`
 Public demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
+PyPI: pending Trusted Publisher setup
 ```
+
+## Reddit Draft
+
+Target communities should be chosen only after reading their current rules.
+`r/opensource` and `r/github` may be relevant, but self-promotion rules vary.
+
+Title:
+
+```text
+Feedback wanted: a CLI readiness checklist for small OSS maintainers
+```
+
+Body:
+
+```text
+I maintain an early-stage OSS tool called Maintainer Readiness Kit. It is a
+small Python CLI and GitHub Action that generates a maintainer-readiness report
+for a repository.
+
+It checks README, license, contributing/security docs, issue and PR templates,
+CI, tests, release notes, git activity, stale public issues/PRs,
+ecosystem-specific recommendations, SARIF output, and high-risk local
+credential filenames.
+
+I am looking for practical maintainer feedback, not asking for stars. The main
+question is: which signals are actually useful before publishing a repo or
+inviting contributors, and which checks are noise?
+
+Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
+Public GitHub Action demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
+Latest release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.6.1
+
+PyPI install is not live yet; the GitHub release has wheel/sdist assets, and
+PyPI Trusted Publisher setup is the remaining packaging step.
+```
+
+## X Draft
+
+Use this only from an account that can respond to replies. Do not automate
+repeated reposts or replies.
+
+```text
+I'm building Maintainer Readiness Kit, a small OSS CLI/GitHub Action that checks whether a repo is ready for contributors: README, license, security docs, CI, tests, stale issues/PRs, SARIF, and maintainer workflow signals.
+
+Feedback from OSS maintainers wanted:
+https://github.com/YUUDAI-s/maintainer-readiness-kit
+```
+
+## Manual Posting Checklist
+
+1. Confirm the account is logged in.
+2. Read the target community rules on the same day.
+3. Use the repository URL as the primary link.
+4. Keep claims accurate: early-stage, public demo available, PyPI pending.
+5. Do not ask for stars, upvotes, comments, or artificial engagement.
+6. Stay available to answer feedback for 24 hours.
+7. Record the posted URL in this document or in a follow-up issue.
 
 ## Feedback Questions
 
