@@ -12,6 +12,9 @@
 ## 0.3.0
 
 - Add maintainer workload summaries for issue triage and PR review.
+- [x] Add configurable stale issue and pull request thresholds.
+- [x] Add SARIF output for CI and code-scanning workflows.
+- [x] Add Java and JVM ecosystem recommendations.
 - Add JSON schema output for downstream automations.
 - Add a docs site generated from the CLI help and report examples.
 

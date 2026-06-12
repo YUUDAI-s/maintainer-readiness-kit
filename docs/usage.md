@@ -35,6 +35,13 @@ update time. GitHub represents pull requests in the issues API, so the report
 splits sampled items into issues and PRs before counting items that have not
 been updated in 30 days.
 
+Use `--stale-days` to change that threshold:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m maintainer_readiness inspect . --repo owner/name --stale-days 14 --output readiness-report.md
+```
+
 ## Fail CI Below a Threshold
 
 ```powershell
@@ -46,6 +53,16 @@ The command still prints the report, but exits with code `1` when the readiness
 percentage is below the threshold. This is useful for pull request and release
 checks.
 
+## Write SARIF for Code Scanning
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m maintainer_readiness inspect . --sarif readiness.sarif
+```
+
+SARIF output includes failed maintainer checks, high-risk credential filename
+warnings, and stale public GitHub issue/PR notes when `--repo` is used.
+
 ## Ecosystem Recommendations
 
 The report detects common manifests and adds maintainer recommendations for:
@@ -54,6 +71,7 @@ The report detects common manifests and adds maintainer recommendations for:
 - Node.js: `package.json`, `pnpm-lock.yaml`, `package-lock.json`, `yarn.lock`
 - Rust: `Cargo.toml`, `Cargo.lock`
 - Go: `go.mod`, `go.sum`
+- Java/JVM: `pom.xml`, `build.gradle`, `build.gradle.kts`, `settings.gradle`
 
 If no known manifest is detected, the report falls back to generic maintainer
 recommendations.

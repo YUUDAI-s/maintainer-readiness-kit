@@ -42,9 +42,10 @@ Use it when you need a quick answer to:
   smoke workflow.
 - Performs a conservative high-risk file check before public release.
 - Outputs Markdown or JSON for CI and handoff docs.
+- Outputs SARIF for CI and code-scanning workflows.
 - Classifies readiness as `ready`, `nearly-ready`, or `needs-work`.
-- Detects Python, Node.js, Rust, and Go manifests and adds ecosystem-specific
-  maintainer recommendations.
+- Detects Python, Node.js, Rust, Go, and Java/JVM manifests and adds
+  ecosystem-specific maintainer recommendations.
 
 ## Quick Start
 
@@ -106,6 +107,8 @@ python -m maintainer_readiness inspect . --output readiness-report.md
 python -m maintainer_readiness inspect . --json
 python -m maintainer_readiness inspect . --repo owner/name
 python -m maintainer_readiness inspect . --root-label public-sample
+python -m maintainer_readiness inspect . --repo owner/name --stale-days 14
+python -m maintainer_readiness inspect . --sarif readiness.sarif
 ```
 
 The Markdown report includes:
@@ -122,6 +125,12 @@ The Markdown report includes:
 
 For CI, use `--fail-under` to make the command return a non-zero exit code when
 the readiness percentage is below your chosen threshold.
+
+Use `--stale-days` with `--repo` when your project has a shorter or longer
+triage window than the default 30 days.
+
+Use `--sarif readiness.sarif` when you want failed checks and high-risk file
+warnings in a code-scanning compatible format.
 
 ### GitHub Actions
 
@@ -142,7 +151,11 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m pip install maintainer-readiness-kit
-      - run: maintainer-readiness inspect . --fail-under 80
+      - run: maintainer-readiness inspect . --repo owner/name --fail-under 80 --sarif readiness.sarif
+      - uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: readiness.sarif
 ```
 
 ### `init`

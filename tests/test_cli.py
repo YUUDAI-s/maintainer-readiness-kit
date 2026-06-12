@@ -48,6 +48,25 @@ class CliTests(unittest.TestCase):
 
             self.assertEqual(exit_code, 1)
 
+    def test_inspect_writes_sarif_report(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            sarif = root / "readiness.sarif"
+
+            with redirect_stdout(StringIO()):
+                exit_code = main(["inspect", str(root), "--sarif", str(sarif), "--root-label", "demo"])
+
+            self.assertEqual(exit_code, 0)
+            report = sarif.read_text(encoding="utf-8")
+            self.assertIn('"version": "2.1.0"', report)
+            self.assertIn("maintainer-readiness.license", report)
+
+    def test_rejects_invalid_stale_days(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(SystemExit):
+                main(["inspect", tmp, "--stale-days", "0"])
+
     def test_readiness_exit_code_accepts_passing_threshold(self):
         result = {"percent": 100.0}
 

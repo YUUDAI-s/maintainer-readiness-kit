@@ -30,6 +30,10 @@ class GitHubSummaryTests(unittest.TestCase):
         self.assertEqual(summary["oldest_open_issue_updated_at"], "2026-05-01T00:00:00Z")
         self.assertEqual(summary["oldest_open_pr_updated_at"], "2026-04-01T00:00:00Z")
 
+    def test_summarize_open_items_rejects_non_positive_stale_days(self):
+        with self.assertRaises(ValueError):
+            summarize_open_items([], stale_days=0)
+
 
 if __name__ == "__main__":
     unittest.main()

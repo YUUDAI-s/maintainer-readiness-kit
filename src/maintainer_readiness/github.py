@@ -7,7 +7,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
-def fetch_github_repo(repo: str, token: str | None = None) -> dict:
+def fetch_github_repo(repo: str, token: str | None = None, stale_days: int = 30) -> dict:
     normalized = repo.strip().removeprefix("https://github.com/").strip("/")
     if normalized.count("/") != 1:
         raise ValueError("repo must be owner/name or https://github.com/owner/name")
@@ -20,7 +20,7 @@ def fetch_github_repo(repo: str, token: str | None = None) -> dict:
             auth_token,
             normalized,
         )
-        workload = summarize_open_items(open_items)
+        workload = summarize_open_items(open_items, stale_days=stale_days)
     except RuntimeError as exc:
         workload = {"activity_error": str(exc)}
 
@@ -56,6 +56,8 @@ def _github_get_json(url: str, auth_token: str | None, repo_label: str) -> dict 
 
 
 def summarize_open_items(items: list[dict], now: datetime | None = None, stale_days: int = 30) -> dict:
+    if stale_days <= 0:
+        raise ValueError("stale_days must be positive")
     now = now or datetime.now(timezone.utc)
     cutoff = now - timedelta(days=stale_days)
     issues = []
