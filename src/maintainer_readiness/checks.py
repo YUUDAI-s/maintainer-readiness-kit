@@ -92,6 +92,16 @@ ECOSYSTEM_RULES: tuple[EcosystemRule, ...] = (
             "Use tagged releases for module consumers.",
         ),
     ),
+    EcosystemRule(
+        "java",
+        ("pom.xml", "build.gradle", "build.gradle.kts", "settings.gradle"),
+        (
+            "Run Maven or Gradle tests in CI.",
+            "Document the supported Java version and build tool version.",
+            "Keep dependency update and vulnerability review policy clear.",
+            "Align release notes with package or artifact versions.",
+        ),
+    ),
 )
 
 

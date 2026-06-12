@@ -9,6 +9,7 @@ dist/
 build/
 *.egg-info/
 readiness-report.md
+readiness.sarif
 .env
 .env.*
 *.sqlite3

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 - 2026-06-12
+
+- Added configurable stale issue and pull request thresholds with `--stale-days`.
+- Added SARIF output for CI and code-scanning workflows with `--sarif`.
+- Added Java/JVM ecosystem recommendations.
+
 ## 0.4.0 - 2026-06-06
 
 - Added stale open issue and pull request summaries for public GitHub reports.

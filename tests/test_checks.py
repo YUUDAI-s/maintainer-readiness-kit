@@ -44,6 +44,16 @@ class InspectProjectTests(unittest.TestCase):
         self.assertEqual(ecosystems[0]["ecosystem"], "python")
         self.assertIn("pyproject.toml", ecosystems[0]["evidence"])
 
+    def test_detects_java_ecosystem(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "pom.xml").write_text("<project />\n", encoding="utf-8")
+
+            ecosystems = detect_ecosystems(root)
+
+        self.assertEqual(ecosystems[0]["ecosystem"], "java")
+        self.assertIn("pom.xml", ecosystems[0]["evidence"])
+
     def test_uses_root_label_for_shared_reports(self):
         with tempfile.TemporaryDirectory() as tmp:
             result = inspect_project(tmp, root_label="sample-project")
