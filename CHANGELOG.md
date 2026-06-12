@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.1 - 2026-06-12
+
+- Added a CLI `--version` flag and aligned the package version constant.
+- Documented the public GitHub Action demo repository.
+- Documented PyPI Trusted Publishing setup values after the first publish attempt.
+
 ## 0.6.0 - 2026-06-12
 
 - Added a reusable GitHub Action wrapper.

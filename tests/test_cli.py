@@ -15,6 +15,16 @@ from maintainer_readiness.cli import main, readiness_exit_code
 
 
 class CliTests(unittest.TestCase):
+    def test_version_flag_prints_package_version(self):
+        stdout = StringIO()
+
+        with self.assertRaises(SystemExit) as raised:
+            with redirect_stdout(stdout):
+                main(["--version"])
+
+        self.assertEqual(raised.exception.code, 0)
+        self.assertIn("maintainer-readiness 0.6.1", stdout.getvalue())
+
     def test_inspect_writes_report(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

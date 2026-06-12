@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import sys
 
+from . import __version__
 from .checks import inspect_project
 from .badge import render_badge
 from .github import fetch_github_repo
@@ -18,6 +19,7 @@ def build_parser() -> argparse.ArgumentParser:
         prog="maintainer-readiness",
         description="Generate maintainer-readiness reports for OSS repositories.",
     )
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     inspect_parser = subparsers.add_parser("inspect", help="Inspect a repository.")

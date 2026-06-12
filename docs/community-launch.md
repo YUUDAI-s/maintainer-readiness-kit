@@ -31,6 +31,7 @@ for maintainer-support programs.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
 GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.0`
+Public demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
 
 ## Show HN Draft
 
@@ -59,6 +60,7 @@ which weights are wrong, and what the tool should detect next.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
 GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.0`
+Public demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
 ```
 
 ## Feedback Questions
