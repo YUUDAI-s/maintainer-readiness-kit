@@ -15,6 +15,8 @@
 - [x] Add configurable stale issue and pull request thresholds.
 - [x] Add SARIF output for CI and code-scanning workflows.
 - [x] Add Java and JVM ecosystem recommendations.
+- [x] Add a reusable GitHub Action wrapper.
+- [x] Add Shields endpoint badge JSON output.
 - Add JSON schema output for downstream automations.
 - Add a docs site generated from the CLI help and report examples.
 

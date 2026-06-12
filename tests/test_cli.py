@@ -1,6 +1,7 @@
 from pathlib import Path
 from contextlib import redirect_stdout
 from io import StringIO
+import json
 import sys
 import tempfile
 import unittest
@@ -61,6 +62,21 @@ class CliTests(unittest.TestCase):
             report = sarif.read_text(encoding="utf-8")
             self.assertIn('"version": "2.1.0"', report)
             self.assertIn("maintainer-readiness.license", report)
+
+    def test_inspect_writes_badge_json(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("# Demo\n", encoding="utf-8")
+            badge = root / "badge.json"
+
+            with redirect_stdout(StringIO()):
+                exit_code = main(["inspect", str(root), "--badge-json", str(badge)])
+
+            self.assertEqual(exit_code, 0)
+            payload = json.loads(badge.read_text(encoding="utf-8"))
+            self.assertEqual(payload["schemaVersion"], 1)
+            self.assertEqual(payload["label"], "maintainer readiness")
+            self.assertIn("%", payload["message"])
 
     def test_rejects_invalid_stale_days(self):
         with tempfile.TemporaryDirectory() as tmp:

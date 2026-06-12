@@ -63,6 +63,34 @@ python -m maintainer_readiness inspect . --sarif readiness.sarif
 SARIF output includes failed maintainer checks, high-risk credential filename
 warnings, and stale public GitHub issue/PR notes when `--repo` is used.
 
+## Write Badge JSON
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m maintainer_readiness inspect . --badge-json readiness-badge.json
+```
+
+The badge file follows the Shields endpoint schema and can be published from a
+docs site, release artifact, or static dashboard.
+
+## Use the GitHub Action
+
+```yaml
+steps:
+  - uses: actions/checkout@v4
+  - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.0
+    with:
+      repo: owner/name
+      fail-under: "80"
+      stale-days: "30"
+      output: readiness-report.md
+      sarif: readiness.sarif
+      badge-json: readiness-badge.json
+```
+
+The action installs the CLI from the checked-out action version and runs the
+same `inspect` command that is available locally.
+
 ## Ecosystem Recommendations
 
 The report detects common manifests and adds maintainer recommendations for:

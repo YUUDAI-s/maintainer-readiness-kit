@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0 - 2026-06-12
+
+- Added a reusable GitHub Action wrapper.
+- Added Shields endpoint badge JSON output with `--badge-json`.
+- Updated the project CI to use the local GitHub Action.
+
 ## 0.5.0 - 2026-06-12
 
 - Added configurable stale issue and pull request thresholds with `--stale-days`.

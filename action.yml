@@ -1,0 +1,73 @@
+name: Maintainer Readiness Kit
+description: Generate maintainer-readiness reports for open source repositories.
+author: YUUDAI-s
+
+inputs:
+  path:
+    description: Repository path to inspect.
+    required: false
+    default: "."
+  repo:
+    description: Optional GitHub repository as owner/name for public signals.
+    required: false
+    default: ""
+  fail-under:
+    description: Fail when the readiness percentage is below this score.
+    required: false
+    default: "80"
+  stale-days:
+    description: Treat open issues and pull requests as stale after this many days without updates.
+    required: false
+    default: "30"
+  output:
+    description: Markdown report path.
+    required: false
+    default: "readiness-report.md"
+  sarif:
+    description: SARIF report path. Leave empty to skip SARIF generation.
+    required: false
+    default: "readiness.sarif"
+  badge-json:
+    description: Shields endpoint JSON path. Leave empty to skip badge JSON generation.
+    required: false
+    default: "readiness-badge.json"
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+    - name: Install Maintainer Readiness Kit
+      shell: bash
+      run: python -m pip install "${GITHUB_ACTION_PATH}"
+    - name: Run maintainer readiness inspection
+      shell: bash
+      env:
+        MRK_PATH: ${{ inputs.path }}
+        MRK_REPO: ${{ inputs.repo }}
+        MRK_FAIL_UNDER: ${{ inputs.fail-under }}
+        MRK_STALE_DAYS: ${{ inputs.stale-days }}
+        MRK_OUTPUT: ${{ inputs.output }}
+        MRK_SARIF: ${{ inputs.sarif }}
+        MRK_BADGE_JSON: ${{ inputs.badge-json }}
+      run: |
+        set -euo pipefail
+        args=("${MRK_PATH}")
+        if [[ -n "${MRK_REPO}" ]]; then
+          args+=(--repo "${MRK_REPO}")
+        fi
+        if [[ -n "${MRK_OUTPUT}" ]]; then
+          args+=(--output "${MRK_OUTPUT}")
+        fi
+        if [[ -n "${MRK_SARIF}" ]]; then
+          args+=(--sarif "${MRK_SARIF}")
+        fi
+        if [[ -n "${MRK_BADGE_JSON}" ]]; then
+          args+=(--badge-json "${MRK_BADGE_JSON}")
+        fi
+        args+=(--stale-days "${MRK_STALE_DAYS}")
+        if [[ -n "${MRK_FAIL_UNDER}" ]]; then
+          args+=(--fail-under "${MRK_FAIL_UNDER}")
+        fi
+        maintainer-readiness inspect "${args[@]}"

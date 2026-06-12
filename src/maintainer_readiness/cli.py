@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 
 from .checks import inspect_project
+from .badge import render_badge
 from .github import fetch_github_repo
 from .report import render_markdown
 from .sarif import render_sarif
@@ -24,6 +25,7 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_parser.add_argument("--repo", help="Optional GitHub repo as owner/name or URL.")
     inspect_parser.add_argument("--output", help="Write Markdown report to this path.")
     inspect_parser.add_argument("--sarif", help="Write SARIF report to this path.")
+    inspect_parser.add_argument("--badge-json", help="Write Shields endpoint JSON to this path.")
     inspect_parser.add_argument("--root-label", help="Display label to use instead of the absolute local root path.")
     inspect_parser.add_argument("--json", action="store_true", help="Print JSON instead of Markdown.")
     inspect_parser.add_argument(
@@ -70,6 +72,10 @@ def run_inspect(args: argparse.Namespace) -> int:
         sarif_path = Path(args.sarif)
         sarif_path.parent.mkdir(parents=True, exist_ok=True)
         sarif_path.write_text(json.dumps(render_sarif(result, github), ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
+    if args.badge_json:
+        badge_path = Path(args.badge_json)
+        badge_path.parent.mkdir(parents=True, exist_ok=True)
+        badge_path.write_text(json.dumps(render_badge(result), ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
 
     if args.json:
         payload = {"readiness": result, "github": github}

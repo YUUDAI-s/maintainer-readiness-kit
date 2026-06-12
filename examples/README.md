@@ -2,6 +2,8 @@
 
 This directory contains generated sample reports.
 
+- `github-action.yml`: copyable GitHub Actions workflow that runs
+  `YUUDAI-s/maintainer-readiness-kit@v0.6.0`.
 - `reports/maintainer-readiness-kit.md`: report generated from this project.
 - `reports/speca-public-snapshot.md`: report generated from a local checkout of
   the public `NyxFoundation/speca` repository. This project is not affiliated

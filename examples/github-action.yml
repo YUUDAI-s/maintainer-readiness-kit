@@ -1,0 +1,20 @@
+name: Maintainer readiness
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.0
+        with:
+          repo: owner/name
+          fail-under: "80"
+          stale-days: "30"
+          output: readiness-report.md
+          sarif: readiness.sarif
+          badge-json: readiness-badge.json

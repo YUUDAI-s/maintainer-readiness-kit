@@ -10,6 +10,7 @@ build/
 *.egg-info/
 readiness-report.md
 readiness.sarif
+readiness-badge.json
 .env
 .env.*
 *.sqlite3

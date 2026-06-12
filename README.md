@@ -1,6 +1,7 @@
 # Maintainer Readiness Kit
 
 [![Maintainer readiness](https://github.com/YUUDAI-s/maintainer-readiness-kit/actions/workflows/maintainer-readiness.yml/badge.svg)](https://github.com/YUUDAI-s/maintainer-readiness-kit/actions/workflows/maintainer-readiness.yml)
+[![GitHub Action](https://img.shields.io/badge/GitHub%20Action-ready-brightgreen.svg)](action.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg)](pyproject.toml)
 
@@ -43,6 +44,8 @@ Use it when you need a quick answer to:
 - Performs a conservative high-risk file check before public release.
 - Outputs Markdown or JSON for CI and handoff docs.
 - Outputs SARIF for CI and code-scanning workflows.
+- Outputs Shields endpoint badge JSON for project dashboards.
+- Runs as a reusable GitHub Action.
 - Classifies readiness as `ready`, `nearly-ready`, or `needs-work`.
 - Detects Python, Node.js, Rust, Go, and Java/JVM manifests and adds
   ecosystem-specific maintainer recommendations.
@@ -57,6 +60,20 @@ cd maintainer-readiness-kit
 python -m pip install -e .
 maintainer-readiness inspect . --output readiness-report.md
 maintainer-readiness inspect . --fail-under 90
+```
+
+Use it directly in GitHub Actions:
+
+```yaml
+steps:
+  - uses: actions/checkout@v4
+  - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.0
+    with:
+      repo: owner/name
+      fail-under: "80"
+      output: readiness-report.md
+      sarif: readiness.sarif
+      badge-json: readiness-badge.json
 ```
 
 After the package is published to PyPI:
@@ -109,6 +126,7 @@ python -m maintainer_readiness inspect . --repo owner/name
 python -m maintainer_readiness inspect . --root-label public-sample
 python -m maintainer_readiness inspect . --repo owner/name --stale-days 14
 python -m maintainer_readiness inspect . --sarif readiness.sarif
+python -m maintainer_readiness inspect . --badge-json readiness-badge.json
 ```
 
 The Markdown report includes:
@@ -132,6 +150,9 @@ triage window than the default 30 days.
 Use `--sarif readiness.sarif` when you want failed checks and high-risk file
 warnings in a code-scanning compatible format.
 
+Use `--badge-json readiness-badge.json` when you want a Shields-compatible
+endpoint JSON payload for a dashboard or docs site.
+
 ### GitHub Actions
 
 ```yaml
@@ -147,11 +168,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.0
         with:
-          python-version: "3.11"
-      - run: python -m pip install maintainer-readiness-kit
-      - run: maintainer-readiness inspect . --repo owner/name --fail-under 80 --sarif readiness.sarif
+          repo: owner/name
+          fail-under: "80"
+          output: readiness-report.md
+          sarif: readiness.sarif
+          badge-json: readiness-badge.json
       - uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
@@ -214,6 +237,8 @@ repositories.
 See [docs/pypi.md](docs/pypi.md) for package build and publishing notes.
 See [docs/community-launch.md](docs/community-launch.md) for community launch
 copy and posting rules.
+See [examples/github-action.yml](examples/github-action.yml) for a copyable
+GitHub Actions workflow.
 
 ## License
 
