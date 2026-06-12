@@ -15,4 +15,12 @@ jobs:
           python-version: "3.11"
       - run: python -m pip install -e .
       - run: python -m unittest discover -s tests
-      - run: python -m maintainer_readiness inspect . --output readiness-report.md --fail-under 90
+      - uses: ./
+        with:
+          repo: YUUDAI-s/maintainer-readiness-kit
+          fail-under: "90"
+          stale-days: "14"
+          output: readiness-report.md
+          sarif: readiness.sarif
+          badge-json: readiness-badge.json
+      - run: test -s readiness-report.md && test -s readiness.sarif && test -s readiness-badge.json

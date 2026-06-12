@@ -30,6 +30,7 @@ before publishing a repository, onboarding contributors, or preparing evidence
 for maintainer-support programs.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
+GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.0`
 
 ## Show HN Draft
 
@@ -57,6 +58,7 @@ I would like feedback from maintainers on which readiness signals are useful,
 which weights are wrong, and what the tool should detect next.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
+GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.0`
 ```
 
 ## Feedback Questions
