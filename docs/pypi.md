@@ -34,3 +34,26 @@ Before running it:
 
 The workflow builds the package, runs `twine check`, and publishes with PyPI
 trusted publishing.
+
+## Trusted Publisher Values
+
+The first manual publish attempt built and validated the package, then failed
+at the trusted-publishing exchange because PyPI did not have a matching
+publisher configured.
+
+Configure these values in PyPI Trusted Publishing:
+
+- PyPI project name: `maintainer-readiness-kit`
+- Owner: `YUUDAI-s`
+- Repository: `maintainer-readiness-kit`
+- Workflow: `publish-python.yml`
+- Environment: `pypi`
+
+The GitHub OIDC subject observed from the failed publish attempt was:
+
+```text
+repo:YUUDAI-s/maintainer-readiness-kit:environment:pypi
+```
+
+After configuring the publisher in PyPI, rerun the manual `Publish Python
+package` workflow from GitHub Actions.

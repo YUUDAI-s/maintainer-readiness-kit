@@ -76,6 +76,10 @@ steps:
       badge-json: readiness-badge.json
 ```
 
+Public demo repository:
+[`YUUDAI-s/maintainer-readiness-kit-action-demo`](https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo)
+uses `YUUDAI-s/maintainer-readiness-kit@v0.6.0` in CI.
+
 After the package is published to PyPI:
 
 ```powershell
@@ -234,6 +238,8 @@ python -m maintainer_readiness inspect . --output readiness-report.md
 See [ROADMAP.md](ROADMAP.md) for near-term maintainer-focused work.
 See [examples/reports](examples/reports) for generated reports from real
 repositories.
+See the public action demo at
+[YUUDAI-s/maintainer-readiness-kit-action-demo](https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo).
 See [docs/pypi.md](docs/pypi.md) for package build and publishing notes.
 See [docs/community-launch.md](docs/community-launch.md) for community launch
 copy and posting rules.
