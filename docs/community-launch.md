@@ -31,9 +31,9 @@ for maintainer-support programs.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
 Release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.6.1
-GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.0`
+GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.1`
 Public demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
-PyPI: pending Trusted Publisher setup
+PyPI: https://pypi.org/project/maintainer-readiness-kit/
 
 ## Show HN Draft
 
@@ -62,9 +62,9 @@ which weights are wrong, and what the tool should detect next.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
 Release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.6.1
-GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.0`
+GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.1`
 Public demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
-PyPI: pending Trusted Publisher setup
+PyPI: https://pypi.org/project/maintainer-readiness-kit/
 ```
 
 ## Reddit Draft
@@ -95,11 +95,9 @@ question is: which signals are actually useful before publishing a repo or
 inviting contributors, and which checks are noise?
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
+PyPI: https://pypi.org/project/maintainer-readiness-kit/
 Public GitHub Action demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
 Latest release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.6.1
-
-PyPI install is not live yet; the GitHub release has wheel/sdist assets, and
-PyPI Trusted Publisher setup is the remaining packaging step.
 ```
 
 ## X Draft
@@ -119,7 +117,7 @@ https://github.com/YUUDAI-s/maintainer-readiness-kit
 1. Confirm the account is logged in.
 2. Read the target community rules on the same day.
 3. Use the repository URL as the primary link.
-4. Keep claims accurate: early-stage, public demo available, PyPI pending.
+4. Keep claims accurate: early-stage, public demo available, PyPI install live.
 5. Do not ask for stars, upvotes, comments, or artificial engagement.
 6. Stay available to answer feedback for 24 hours.
 7. Record the posted URL in this document or in a follow-up issue.

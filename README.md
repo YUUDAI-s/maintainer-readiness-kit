@@ -67,7 +67,7 @@ Use it directly in GitHub Actions:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.0
+  - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.1
     with:
       repo: owner/name
       fail-under: "80"
@@ -78,9 +78,9 @@ steps:
 
 Public demo repository:
 [`YUUDAI-s/maintainer-readiness-kit-action-demo`](https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo)
-uses `YUUDAI-s/maintainer-readiness-kit@v0.6.0` in CI.
+uses the reusable action in CI.
 
-After the package is published to PyPI:
+Install from PyPI:
 
 ```powershell
 python -m pip install maintainer-readiness-kit
@@ -172,7 +172,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.0
+      - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.1
         with:
           repo: owner/name
           fail-under: "80"
