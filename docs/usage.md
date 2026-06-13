@@ -78,7 +78,7 @@ docs site, release artifact, or static dashboard.
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.0
+  - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.1
     with:
       repo: owner/name
       fail-under: "80"

@@ -3,7 +3,7 @@
 This directory contains generated sample reports.
 
 - `github-action.yml`: copyable GitHub Actions workflow that runs
-  `YUUDAI-s/maintainer-readiness-kit@v0.6.0`.
+  `YUUDAI-s/maintainer-readiness-kit@v0.6.1`.
 - Public demo repo:
   `https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo`
 - `reports/maintainer-readiness-kit.md`: report generated from this project.
