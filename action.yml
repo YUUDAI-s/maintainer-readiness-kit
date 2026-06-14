@@ -31,6 +31,10 @@ inputs:
     description: Shields endpoint JSON path. Leave empty to skip badge JSON generation.
     required: false
     default: "readiness-badge.json"
+  config:
+    description: Optional maintainer-readiness.toml path.
+    required: false
+    default: ""
 
 runs:
   using: composite
@@ -51,9 +55,13 @@ runs:
         MRK_OUTPUT: ${{ inputs.output }}
         MRK_SARIF: ${{ inputs.sarif }}
         MRK_BADGE_JSON: ${{ inputs.badge-json }}
+        MRK_CONFIG: ${{ inputs.config }}
       run: |
         set -euo pipefail
         args=("${MRK_PATH}")
+        if [[ -n "${MRK_CONFIG}" ]]; then
+          args+=(--config "${MRK_CONFIG}")
+        fi
         if [[ -n "${MRK_REPO}" ]]; then
           args+=(--repo "${MRK_REPO}")
         fi
@@ -66,7 +74,9 @@ runs:
         if [[ -n "${MRK_BADGE_JSON}" ]]; then
           args+=(--badge-json "${MRK_BADGE_JSON}")
         fi
-        args+=(--stale-days "${MRK_STALE_DAYS}")
+        if [[ -n "${MRK_STALE_DAYS}" ]]; then
+          args+=(--stale-days "${MRK_STALE_DAYS}")
+        fi
         if [[ -n "${MRK_FAIL_UNDER}" ]]; then
           args+=(--fail-under "${MRK_FAIL_UNDER}")
         fi

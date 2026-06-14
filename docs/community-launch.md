@@ -23,15 +23,16 @@ Maintainer Readiness Kit is a dependency-light CLI that generates a shareable
 readiness report for open source repositories. It checks maintainer basics like
 README, license, contributing guide, security policy, issue/PR templates, CI,
 tests, release notes, git activity, stale public issues/PRs, ecosystem-specific
-recommendations, and high-risk local credential filenames.
+recommendations, high-risk local credential filenames, and reusable
+`maintainer-readiness.toml` defaults for local and CI runs.
 
 I built it for solo and small-team maintainers who want a concrete checklist
 before publishing a repository, onboarding contributors, or preparing evidence
 for maintainer-support programs.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
-Release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.6.1
-GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.1`
+Release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.7.0
+GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.7.0`
 Public demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
 PyPI: https://pypi.org/project/maintainer-readiness-kit/
 
@@ -51,8 +52,9 @@ shareable maintainer-readiness report for open source repositories.
 
 It checks README, license, contributing docs, security policy, issue/PR
 templates, CI, tests, release notes, local git activity, public GitHub signals,
-stale issues/PRs, ecosystem-specific recommendations, and high-risk credential
-filenames such as .env.local.
+stale issues/PRs, ecosystem-specific recommendations, high-risk credential
+filenames such as .env.local, and maintainer-readiness.toml defaults for local
+and CI runs.
 
 The intended use case is a solo or small-team maintainer asking: "Is this repo
 ready to publish or invite contributors to?"
@@ -61,8 +63,8 @@ I would like feedback from maintainers on which readiness signals are useful,
 which weights are wrong, and what the tool should detect next.
 
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
-Release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.6.1
-GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.6.1`
+Release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.7.0
+GitHub Action: `YUUDAI-s/maintainer-readiness-kit@v0.7.0`
 Public demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
 PyPI: https://pypi.org/project/maintainer-readiness-kit/
 ```
@@ -87,8 +89,8 @@ for a repository.
 
 It checks README, license, contributing/security docs, issue and PR templates,
 CI, tests, release notes, git activity, stale public issues/PRs,
-ecosystem-specific recommendations, SARIF output, and high-risk local
-credential filenames.
+ecosystem-specific recommendations, SARIF output, config-file defaults, and
+high-risk local credential filenames.
 
 I am looking for practical maintainer feedback, not asking for stars. The main
 question is: which signals are actually useful before publishing a repo or
@@ -97,7 +99,7 @@ inviting contributors, and which checks are noise?
 Repo: https://github.com/YUUDAI-s/maintainer-readiness-kit
 PyPI: https://pypi.org/project/maintainer-readiness-kit/
 Public GitHub Action demo: https://github.com/YUUDAI-s/maintainer-readiness-kit-action-demo
-Latest release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.6.1
+Latest release: https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.7.0
 ```
 
 ## X Draft
@@ -106,7 +108,7 @@ Use this only from an account that can respond to replies. Do not automate
 repeated reposts or replies.
 
 ```text
-I'm building Maintainer Readiness Kit, a small OSS CLI/GitHub Action that checks whether a repo is ready for contributors: README, license, security docs, CI, tests, stale issues/PRs, SARIF, and maintainer workflow signals.
+I'm building Maintainer Readiness Kit, a small OSS CLI/GitHub Action that checks whether a repo is ready for contributors: README, license, security docs, CI, tests, stale issues/PRs, SARIF, config defaults, and maintainer workflow signals.
 
 Feedback from OSS maintainers wanted:
 https://github.com/YUUDAI-s/maintainer-readiness-kit

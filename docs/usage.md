@@ -42,6 +42,34 @@ $env:PYTHONPATH = "src"
 python -m maintainer_readiness inspect . --repo owner/name --stale-days 14 --output readiness-report.md
 ```
 
+## Reuse Defaults From a Config File
+
+Create `maintainer-readiness.toml` or `.maintainer-readiness.toml` in the
+repository root:
+
+```toml
+repo = "owner/name"
+output = "readiness-report.md"
+sarif = "readiness.sarif"
+badge-json = "readiness-badge.json"
+root-label = "public-demo"
+stale-days = 14
+fail-under = 90
+```
+
+Then run:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m maintainer_readiness inspect C:\path\to\repo
+```
+
+Use `--config path\to\maintainer-readiness.toml` to choose a specific file.
+CLI flags override config values.
+
+The repository also includes a copy-ready example at
+`examples/maintainer-readiness.toml`.
+
 ## Fail CI Below a Threshold
 
 ```powershell
@@ -78,7 +106,7 @@ docs site, release artifact, or static dashboard.
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.1
+  - uses: YUUDAI-s/maintainer-readiness-kit@v0.7.0
     with:
       repo: owner/name
       fail-under: "80"
@@ -86,10 +114,14 @@ steps:
       output: readiness-report.md
       sarif: readiness.sarif
       badge-json: readiness-badge.json
+      config: maintainer-readiness.toml
 ```
 
 The action installs the CLI from the checked-out action version and runs the
-same `inspect` command that is available locally.
+same `inspect` command that is available locally. Action inputs are passed as
+CLI flags, so explicit inputs override matching values from
+`maintainer-readiness.toml`. Leave an Action input empty when you want the
+config file to provide that value.
 
 ## Ecosystem Recommendations
 

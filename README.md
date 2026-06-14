@@ -46,6 +46,7 @@ Use it when you need a quick answer to:
 - Outputs SARIF for CI and code-scanning workflows.
 - Outputs Shields endpoint badge JSON for project dashboards.
 - Runs as a reusable GitHub Action.
+- Reads `maintainer-readiness.toml` / `.maintainer-readiness.toml` defaults.
 - Classifies readiness as `ready`, `nearly-ready`, or `needs-work`.
 - Detects Python, Node.js, Rust, Go, and Java/JVM manifests and adds
   ecosystem-specific maintainer recommendations.
@@ -67,7 +68,7 @@ Use it directly in GitHub Actions:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.1
+  - uses: YUUDAI-s/maintainer-readiness-kit@v0.7.0
     with:
       repo: owner/name
       fail-under: "80"
@@ -131,7 +132,27 @@ python -m maintainer_readiness inspect . --root-label public-sample
 python -m maintainer_readiness inspect . --repo owner/name --stale-days 14
 python -m maintainer_readiness inspect . --sarif readiness.sarif
 python -m maintainer_readiness inspect . --badge-json readiness-badge.json
+python -m maintainer_readiness inspect . --config maintainer-readiness.toml
 ```
+
+Config files use simple TOML scalar values:
+
+```toml
+repo = "owner/name"
+output = "readiness-report.md"
+sarif = "readiness.sarif"
+badge-json = "readiness-badge.json"
+root-label = "public-demo"
+stale-days = 14
+fail-under = 90
+```
+
+`inspect` automatically reads `maintainer-readiness.toml` or
+`.maintainer-readiness.toml` from the inspected root when present. CLI flags
+override config values.
+
+See [examples/maintainer-readiness.toml](examples/maintainer-readiness.toml)
+for a copy-ready configuration file.
 
 The Markdown report includes:
 
@@ -172,8 +193,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.1
+      - uses: YUUDAI-s/maintainer-readiness-kit@v0.7.0
         with:
+          config: maintainer-readiness.toml
           repo: owner/name
           fail-under: "80"
           output: readiness-report.md
@@ -184,6 +206,10 @@ jobs:
         with:
           sarif_file: readiness.sarif
 ```
+
+Action inputs are passed as CLI flags, so explicit inputs override matching
+values from `maintainer-readiness.toml`. Leave an Action input empty when you
+want the config file to provide that value.
 
 ### `init`
 

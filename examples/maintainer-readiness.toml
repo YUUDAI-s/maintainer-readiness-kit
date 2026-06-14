@@ -1,0 +1,10 @@
+# Example Maintainer Readiness Kit configuration.
+# Copy this file to the root of a repository as maintainer-readiness.toml.
+
+repo = "owner/name"
+output = "readiness-report.md"
+sarif = "readiness.sarif"
+badge-json = "readiness-badge.json"
+root-label = "public-demo"
+stale-days = 14
+fail-under = 80
