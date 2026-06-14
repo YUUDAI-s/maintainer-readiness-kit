@@ -66,6 +66,8 @@ repo:YUUDAI-s/maintainer-readiness-kit:environment:pypi
 Published package:
 
 - PyPI: `https://pypi.org/project/maintainer-readiness-kit/`
-- Version: `0.6.1`
+- Version: `0.7.0`
 - Successful workflow:
-  `https://github.com/YUUDAI-s/maintainer-readiness-kit/actions/runs/27454249674`
+  `https://github.com/YUUDAI-s/maintainer-readiness-kit/actions/runs/27488357566`
+- Latest release:
+  `https://github.com/YUUDAI-s/maintainer-readiness-kit/releases/tag/v0.7.0`
