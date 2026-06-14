@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0 - 2026-06-14
+
+- Added `inspect --config` and automatic `maintainer-readiness.toml` /
+  `.maintainer-readiness.toml` loading.
+- Added config defaults for `repo`, `output`, `sarif`, `badge-json`,
+  `root-label`, `stale-days`, `fail-under`, and `json`.
+- Added GitHub Action `config` input.
+
 ## 0.6.1 - 2026-06-12
 
 - Added a CLI `--version` flag and aligned the package version constant.

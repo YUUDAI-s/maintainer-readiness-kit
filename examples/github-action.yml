@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: YUUDAI-s/maintainer-readiness-kit@v0.6.1
+      - uses: YUUDAI-s/maintainer-readiness-kit@v0.7.0
         with:
+          config: maintainer-readiness.toml
           repo: owner/name
           fail-under: "80"
           stale-days: "30"
